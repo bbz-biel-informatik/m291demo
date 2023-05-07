@@ -1,0 +1,17 @@
+<h1>Aktuelles Wetter in Bern</h1>
+
+<button onclick="run()">Abrufen</button>
+
+<div id="wetter_container"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
+<script src="https://frontend.bbz.cloud/scripts/v1/render.js"></script>
+<script>
+  function run() {
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=46.94&longitude=7.44&current_weather=true&hourly=temperature_2m,relativehumidity_2m,windspeed_10m`)
+      .then(response => response.json())
+      .then(data => {
+        renderTo(data, 'wetter.mustache', '#wetter_container');
+      })
+  }
+</script>
